@@ -2,6 +2,7 @@ import './Home.css'
 import Project from "./Project.jsx";
 import {useLoaderData} from "react-router-dom";
 import {fetchProjects} from "../../services/projects.js";
+import {logout} from "../../services/auth.js";
 
 function Home() {
     const { projects } = useLoaderData();
@@ -20,6 +21,15 @@ function Home() {
 
 export async function homeLoader() {
     return { projects: await fetchProjects() }
+}
+
+export async function homeAction({ request }) {
+    const formData = await request.formData();
+    if (formData.get('action') === 'logout') {
+        logout();
+    }
+
+    return null;
 }
 
 export default Home

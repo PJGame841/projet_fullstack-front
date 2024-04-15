@@ -1,7 +1,9 @@
 import EditableField from "./EditableField.jsx";
-import {Form, useSubmit} from "react-router-dom";
+import {Form, useLoaderData, useSubmit} from "react-router-dom";
+import {fetchProject, updateProject} from "../../services/projects.js";
 
-function EditableProject({ project }) {
+function EditableProject() {
+    const { project } = useLoaderData();
     const submit = useSubmit();
 
     return (
@@ -18,6 +20,24 @@ function EditableProject({ project }) {
             {/*<button type="submit">Save</button>*/}
         </Form>
     )
+}
+
+export async function editableProjectLoader({ params }) {
+    return { project: await fetchProject(params.projectId) }
+}
+
+export async function editableProjectAction({ params, request }) {
+    if (params.projectId) {
+        const formData = await request.formData();
+        const editedProject = {}
+        for (let [key, value] of formData.entries()) {
+            editedProject[key] = value;
+        }
+
+        const project = await updateProject(params.projectId, editedProject);
+
+        return { project };
+    }
 }
 
 export default EditableProject

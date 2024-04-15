@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {createBrowserRouter, redirect, RouterProvider} from 'react-router-dom'
-import Home, { homeLoader } from './pages/home/Home.jsx'
+import Home, {homeAction, homeLoader} from './pages/home/Home.jsx'
 import Login, {loginAction, loginLoader} from './pages/login/Login.jsx'
 import './index.css'
-import Dashboard, {dashboardAction, dashboardLoader} from "./pages/dashboard/Dashboard.jsx";
+import Dashboard, {dashboardLoader} from "./pages/dashboard/Dashboard.jsx";
 import {logout} from "./services/auth.js";
-import LandingPage, {landingPageLoader} from "./components/LandingPage/LandingPage.jsx";
+import LandingPage, { landingPageLoader} from "./components/LandingPage/LandingPage.jsx";
+import EditableProject, {editableProjectAction, editableProjectLoader} from "./pages/dashboard/EditableProject.jsx";
 
 const router = createBrowserRouter([
     {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 loader: homeLoader,
+                action: homeAction,
                 element: <Home />,
             },
             {
@@ -26,19 +28,26 @@ const router = createBrowserRouter([
                 element: <Login />,
             },
             {
-                path: '/dashboard/:projectId?',
+                path: '/dashboard',
                 loader: dashboardLoader,
-                action: dashboardAction,
                 element: <Dashboard />,
-            },
-            {
-                path: '/logout',
-                loader: () => {
-                    logout();
-                    return redirect('/login');
-                }
+                children: [
+                    {
+                        path: '/dashboard/:projectId',
+                        loader: editableProjectLoader,
+                        action: editableProjectAction,
+                        element: <EditableProject />
+                    }
+                ]
             }
         ]
+    },
+    {
+        path: '/logout',
+        loader: () => {
+            logout();
+            return redirect('/login');
+        }
     }
 ])
 
