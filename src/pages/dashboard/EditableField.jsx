@@ -16,7 +16,14 @@ function EditableField({ children, name, defaultValue, tag = 'p', type = 'text' 
                     autoFocus={true}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
-                    onBlur={() => setIsEditing(false)}
+                    onKeyUp={(e) => {
+                        if (e.key === 'Enter') {
+                            setIsEditing(false);
+                        }
+                    }}
+                    onBlur={() => {
+                        setIsEditing(false)
+                    }}
                 />
             ) : (
                 <>

@@ -3,7 +3,7 @@ body {
 }
 
 #root {
-    height: 90vh;
+    height: 85vh;
 }
 
 h1 {
@@ -28,7 +28,6 @@ h1 {
 .side-nav {
     background-color: #1a1a1a;
     width: 20%;
-    min-height: 100%;
     padding: 20px;
     border-radius: 10px;
 }
