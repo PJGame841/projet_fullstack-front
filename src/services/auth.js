@@ -37,3 +37,7 @@ export function isLoggedIn() {
             return data.valid;
         })
 }
+
+export function logout() {
+    localStorage.removeItem('accessToken');
+}

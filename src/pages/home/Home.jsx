@@ -13,12 +13,6 @@ function Home() {
                 {projects.map(project => (
                     <Project key={project._id} project={project}/>
                 ))}
-                {projects.map(project => (
-                    <Project key={project._id} project={project}/>
-                ))}
-                {projects.map(project => (
-                    <Project key={project._id} project={project}/>
-                ))}
             </div>
         </>
     )
