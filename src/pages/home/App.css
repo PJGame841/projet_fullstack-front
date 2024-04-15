@@ -4,3 +4,11 @@
   padding: 2rem;
   text-align: center;
 }
+
+.projects {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: space-around;
+  align-items: center;
+}

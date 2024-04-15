@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import './App.css'
-import Project from "../../components/Project.jsx";
+import Project from "./Project.jsx";
+import {useLoaderData} from "react-router-dom";
 
 function fetchProjects() {
     return fetch('/api/projects')
@@ -8,22 +9,24 @@ function fetchProjects() {
 }
 
 function App() {
-    const [projects, setProjects] = useState([]);
+    const { projects } = useLoaderData();
 
-    useEffect(() => {
-        fetchProjects().then(data => setProjects(data.data));
-    }, []);
-
-  return (
-    <>
-        <div>
-            <h1>Projects</h1>
-            {projects.map(project => (
-                <Project key={project._id} project={project} />
-            ))}
-        </div>
-    </>
-  )
+    return (
+        <>
+            <h1>Projets</h1>
+            <div className="projects">
+                {projects.map(project => (
+                    <Project key={project._id} project={project}/>
+                ))}
+                {projects.map(project => (
+                    <Project key={project._id} project={project}/>
+                ))}
+                {projects.map(project => (
+                    <Project key={project._id} project={project}/>
+                ))}
+            </div>
+        </>
+    )
 }
 
 export default App

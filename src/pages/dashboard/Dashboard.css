@@ -1,0 +1,44 @@
+body {
+    display: block;
+}
+
+#root {
+    height: 90vh;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    min-height: 100%;
+}
+
+.container {
+    width: 70%;
+    padding: 0 20px 20px 20px;
+    border-radius: 10px;
+    min-height: 100%;
+}
+
+.side-nav {
+    background-color: #1a1a1a;
+    width: 20%;
+    min-height: 100%;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.main-content {
+    background-color: #1a1a1a;
+    min-height: 90%;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
