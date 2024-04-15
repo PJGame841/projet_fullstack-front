@@ -1,14 +1,9 @@
-import {useEffect, useState} from 'react'
-import './App.css'
+import './Home.css'
 import Project from "./Project.jsx";
 import {useLoaderData} from "react-router-dom";
+import {fetchProjects} from "../../services/projects.js";
 
-function fetchProjects() {
-    return fetch('/api/projects')
-        .then(response => response.json())
-}
-
-function App() {
+function Home() {
     const { projects } = useLoaderData();
 
     return (
@@ -29,4 +24,8 @@ function App() {
     )
 }
 
-export default App
+export async function homeLoader() {
+    return { projects: await fetchProjects() }
+}
+
+export default Home

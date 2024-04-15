@@ -1,5 +1,5 @@
-import { useState } from "react";
-import {Form, redirect, useActionData, useLoaderData} from "react-router-dom";
+import {Form, redirect, useActionData} from "react-router-dom";
+import {isLoggedIn, login} from "../../services/auth.js";
 
 function Login() {
     const { loginError } = useActionData() || {};
@@ -24,6 +24,24 @@ function Login() {
             </Form>
         </>
     )
+}
+
+export async function loginLoader() {
+    return await isLoggedIn() ? redirect('/') : null;
+}
+
+export async function loginAction({ request }) {
+    const formData = await request.formData();
+    try {
+        const loggedIn = await login(formData.get('username'), formData.get('password'));
+        if (loggedIn) {
+            return null;
+        } else {
+            return { loginError: "Bad username/password" };
+        }
+    } catch (e) {
+        return { loginError: e.message };
+    }
 }
 
 export default Login

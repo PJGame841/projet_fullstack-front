@@ -1,7 +1,8 @@
 import './Dashboard.css';
-import {useState} from "react";
-import {Link, useLoaderData} from "react-router-dom";
+import {Link, redirect, useLoaderData} from "react-router-dom";
 import EditableProject from "./EditableProject.jsx";
+import {isLoggedIn} from "../../services/auth.js";
+import {fetchProjects, updateProject} from "../../services/projects.js";
 
 function Dashboard() {
     const { selectedProject, projects } = useLoaderData();
@@ -26,6 +27,34 @@ function Dashboard() {
             </div>
         </div>
     );
+}
+
+export async function dashboardLoader({ params }) {
+    const isLogged = await isLoggedIn();
+    if (!isLogged) {
+        return redirect('/login');
+    }
+
+    const data = {}
+    if (params.projectId) {
+        data.selectedProject = params.projectId;
+    }
+
+    return { ...data, projects: await fetchProjects() };
+}
+
+export async function dashboardAction({ params, request }) {
+    if (params.projectId) {
+        const formData = await request.formData();
+        const editedProject = {}
+        for (let [key, value] of formData.entries()) {
+            editedProject[key] = value;
+        }
+
+        const project = await updateProject(params.projectId, editedProject);
+
+        return { project };
+    }
 }
 
 export default Dashboard;
