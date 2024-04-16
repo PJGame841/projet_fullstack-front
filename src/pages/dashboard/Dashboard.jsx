@@ -1,6 +1,5 @@
 import './Dashboard.css';
-import {Link, Outlet, redirect, useLoaderData, useLocation} from "react-router-dom";
-import {isLoggedIn} from "../../services/auth.js";
+import {Link, Outlet, useLoaderData, useLocation} from "react-router-dom";
 import {fetchProjects} from "../../services/projects.js";
 
 function Dashboard() {
@@ -35,11 +34,6 @@ function Dashboard() {
 }
 
 export async function dashboardLoader() {
-    const isLogged = await isLoggedIn();
-    if (!isLogged) {
-        return redirect('/login');
-    }
-
     return { projects: await fetchProjects() };
 }
 

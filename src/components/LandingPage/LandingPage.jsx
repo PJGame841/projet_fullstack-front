@@ -1,4 +1,4 @@
-import {Form, Link, Outlet, useLoaderData} from "react-router-dom";
+import {Form, Link, Outlet, redirect, useLoaderData} from "react-router-dom";
 import './LandingPage.css';
 import {isLoggedIn} from "../../services/auth.js";
 
@@ -34,8 +34,18 @@ function LandingPage() {
     );
 }
 
-export async function landingPageLoader() {
-    return {isLogged: await isLoggedIn()};
+const protectedRoutes = [
+    "/dashboard",
+];
+
+export async function landingPageLoader({ request }) {
+    const isLogged = await isLoggedIn();
+
+    if (protectedRoutes.find(route => request.url.includes(route)) && !isLogged) {
+        return redirect('/login');
+    }
+
+    return { isLogged };
 }
 
 export default LandingPage;

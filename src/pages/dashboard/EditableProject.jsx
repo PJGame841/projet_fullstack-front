@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import "./EditableProject.css";
 
 function EditableProject() {
@@ -7,6 +7,12 @@ function EditableProject() {
     const [projectState, setProjectState] = useState(project);
 
     const submit = useSubmit();
+
+    const form = useRef(null);
+
+    useEffect(() => {
+        submit(form.current)
+    }, [projectState]);
 
     const handleAddImage = () => {
         if (projectState.images.length >= 5) return;
@@ -22,6 +28,18 @@ function EditableProject() {
         setProjectState(newProject);
     }
 
+    const handleAddKeyword = () => {
+        const newProject = { ...project };
+        newProject.keywords.push('');
+        setProjectState(newProject);
+    }
+
+    const handleDeleteKeyword = (index) => () => {
+        const newProject = { ...project };
+        newProject.keywords.splice(index, 1);
+        setProjectState(newProject);
+    }
+
     return (
         <>
             {project._id ? (
@@ -30,14 +48,26 @@ function EditableProject() {
                 </Form>
             ) : null}
 
-            <Form method="put" onChange={(e) => {
+            <Form method="put" ref={form} onChange={(e) => {
                 if (!project._id) return;
                 console.log("form change")
                 submit(e.currentTarget)
             }}>
+
                 <EditableField name="title" defaultValue={project.title} tag="h2" required/>
                 <EditableField name="short_description" defaultValue={project.short_description} required/>
                 <EditableField name="description" defaultValue={project.description} required/>
+
+                <hr />
+                {projectState.keywords ? projectState.keywords.map((keyword, index) => (
+                    <div className="keywordsField" key={index}>
+                        <EditableField key={index} name={`keywords[${index}]`} defaultValue={keyword} required/>
+                        <button type="button" onClick={handleDeleteKeyword(index)}>Supprimer</button>
+                    </div>
+                )) : null}
+                <button type="button" onClick={handleAddKeyword}>Ajouter un mot-clé</button>
+                <hr />
+
                 <EditableField name="thumbnail" defaultValue={project.thumbnail} required>
                     <img src={project.thumbnail} alt="project thumbnail"/>
                 </EditableField>
@@ -93,6 +123,13 @@ export async function editableProjectAction({ params, request }) {
             }
 
             editedProject.images.push(value);
+            continue;
+        } else if (("" + key).includes("keywords")) {
+            if (!editedProject.keywords) {
+                editedProject.keywords = [];
+            }
+
+            editedProject.keywords.push(value);
             continue;
         }
 
