@@ -4,8 +4,13 @@ function About() {
         <>
             <h1>A propos</h1>
             <p>
-                Ce site est un portfolio de mes projets personnels et professionnels.
+                Je m'appelle Pierre-Jean Lefort, je suis étudiant en informatique à l'ENSIM.
             </p>
+
+            <h2>Compétences</h2>
+            <ul>
+                <li>aaa</li>
+            </ul>
 
         </>
     )

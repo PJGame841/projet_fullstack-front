@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 
-function EditableField({ children, name, defaultValue, tag = 'p', type = 'text', required = false }) {
-    const [isEditing, setIsEditing] = useState(!defaultValue);
+function EditableField({ children, name, defaultValue, tag = 'p', type = 'text', required = false, editing = false }) {
+    const [isEditing, setIsEditing] = useState(!defaultValue || editing);
     const [value, setValue] = useState(defaultValue);
 
     useEffect(() => {

@@ -2,11 +2,6 @@ nav {
     /*background-color: #333;*/
     color: white;
     padding: 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    z-index: 100;
 
     display: flex;
     justify-content: space-between;
@@ -25,8 +20,10 @@ nav .links a {
 }
 
 nav + .root {
-    margin-top: 100px;
-    min-height: 85%;
+    margin-top: 10px;
+    min-height: 100vh;
+
+    padding: 25px;
 }
 
 footer {
@@ -34,11 +31,6 @@ footer {
     color: white;
     text-align: center;
     padding: 10px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    z-index: 100;
 }
 
 footer a {
