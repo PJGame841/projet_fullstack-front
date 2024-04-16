@@ -7,7 +7,13 @@ import './index.css'
 import Dashboard, {dashboardLoader} from "./pages/dashboard/Dashboard.jsx";
 import {logout} from "./services/auth.js";
 import LandingPage, { landingPageLoader} from "./components/LandingPage/LandingPage.jsx";
-import EditableProject, {editableProjectAction, editableProjectLoader} from "./pages/dashboard/EditableProject.jsx";
+import EditableProject, {
+    editableProjectAction,
+    editableProjectLoader,
+    newProjectLoader
+} from "./pages/dashboard/EditableProject.jsx";
+import About from "./pages/about/About.jsx";
+import Project, {projectLoader} from "./pages/projects/Project.jsx";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +28,15 @@ const router = createBrowserRouter([
                 element: <Home />,
             },
             {
+                path: '/about',
+                element: <About />,
+            },
+            {
+                path: '/projects/:projectId',
+                loader: projectLoader,
+                element: <Project />,
+            },
+            {
                 path: '/login',
                 loader: loginLoader,
                 action: loginAction,
@@ -32,6 +47,12 @@ const router = createBrowserRouter([
                 loader: dashboardLoader,
                 element: <Dashboard />,
                 children: [
+                    {
+                        path: '/dashboard/new',
+                        loader: newProjectLoader,
+                        action: editableProjectAction,
+                        element: <EditableProject />
+                    },
                     {
                         path: '/dashboard/:projectId',
                         loader: editableProjectLoader,

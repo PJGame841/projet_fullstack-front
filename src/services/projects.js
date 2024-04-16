@@ -11,6 +11,24 @@ export function fetchProject(projectId) {
         .then(data => data.data)
 }
 
+export function createProject(project) {
+    return fetch('/api/projects', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(project),
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.valid) {
+                throw new Error(data.message)
+            } else {
+                return data.data
+            }
+        })
+}
+
 export function updateProject(projectId, project) {
     return fetch(`/api/projects/${projectId}`, {
         method: 'PUT',
@@ -18,6 +36,14 @@ export function updateProject(projectId, project) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(project),
+    })
+        .then(response => response.json())
+        .then(data => data.data)
+}
+
+export function deleteProject(projectId) {
+    return fetch(`/api/projects/${projectId}`, {
+        method: 'DELETE',
     })
         .then(response => response.json())
         .then(data => data.data)

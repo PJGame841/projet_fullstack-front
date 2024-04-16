@@ -1,5 +1,5 @@
 import './Home.css'
-import Project from "./Project.jsx";
+import Projects from "./Projects.jsx";
 import {useLoaderData} from "react-router-dom";
 import {fetchProjects} from "../../services/projects.js";
 import {logout} from "../../services/auth.js";
@@ -12,7 +12,7 @@ function Home() {
             <h1>Projets</h1>
             <div className="projects">
                 {projects.map(project => (
-                    <Project key={project._id} project={project}/>
+                    <Projects key={project._id} project={project}/>
                 ))}
             </div>
         </>

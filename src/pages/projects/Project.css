@@ -1,0 +1,26 @@
+h1 {
+    margin-bottom: 0;
+}
+
+.keywords {
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.keywords span {
+    margin-top: 10px;
+    background-color: #343434;
+
+    font-size: 0.8em;
+    color: #c9c9c9;
+    padding: 5px 10px;
+
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

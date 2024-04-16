@@ -7,7 +7,17 @@ function LandingPage() {
 
     return (
         <>
-            <Outlet/>
+            <nav>
+                <h3>Pierre-Jean Lefort</h3>
+
+                <div className="links">
+                    <Link to="/">Projets</Link>
+                    <Link to="/about">A propos</Link>
+                </div>
+            </nav>
+            <div className="root">
+                <Outlet/>
+            </div>
             <footer>
                 <div className="links">
                     <Link to="/">Projets</Link>

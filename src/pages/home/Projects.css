@@ -1,0 +1,21 @@
+.card {
+    background-color: #343434;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+
+    text-decoration: none;
+    color: white;
+}
+
+.card:hover {
+    transform: scale(1.05);
+
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.card img {
+    border-radius: 10px;
+}
