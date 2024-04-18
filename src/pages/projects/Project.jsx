@@ -2,6 +2,7 @@
 import "./Project.css";
 import {useLoaderData} from "react-router-dom";
 import {fetchProject} from "../../services/projects.js";
+import {click} from "../../services/metrics.js";
 
 function Project() {
     const { project } = useLoaderData();
@@ -25,6 +26,8 @@ function Project() {
 }
 
 export async function projectLoader({ params }) {
+    click(params.projectId);
+
     return { project: await fetchProject(params.projectId) };
 }
 
