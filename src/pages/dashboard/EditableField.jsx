@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
+import {TextField} from "@mui/material";
 
-function EditableField({ children, name, defaultValue, tag = 'p', type = 'text', required = false, editing = false }) {
+function EditableField({ children, name, defaultValue, tag = 'p', required = false, editing = false, rows = 1, multiline = false }) {
     const [isEditing, setIsEditing] = useState(!defaultValue || editing);
     const [value, setValue] = useState(defaultValue);
 
@@ -14,13 +15,16 @@ function EditableField({ children, name, defaultValue, tag = 'p', type = 'text',
     return (
         <div>
             {isEditing ? (
-                <input
-                    type={type}
+                <TextField
                     name={name}
+                    label={name}
                     autoFocus={true}
                     placeholder={name}
                     value={value}
+                    rows={rows}
+                    multiline={multiline}
                     required={required}
+                    InputProps={{ style: { color: "white" }}}
                     onChange={(e) => setValue(e.target.value)}
                     onKeyUp={(e) => {
                         if (e.key === 'Enter' && value) {

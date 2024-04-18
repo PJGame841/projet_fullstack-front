@@ -4,6 +4,7 @@ import {useLoaderData} from "react-router-dom";
 import {fetchProjects} from "../../services/projects.js";
 import {logout} from "../../services/auth.js";
 import {useEffect, useState} from "react";
+import {TextField} from "@mui/material";
 
 function Home() {
     const { projects } = useLoaderData();
@@ -34,7 +35,7 @@ function Home() {
     return (
         <>
             <h1>Projets</h1>
-            <input type="text" value={search} onChange={handleSearch} placeholder="Rechercher un projet"/>
+            <TextField className="searchInput" label="Recherche" value={search} onChange={handleSearch} placeholder="Nom du projet ou mot clés"/>
             <div className="projects">
                 {projectsState.map(project => (
                     <Projects key={project._id} project={project}/>

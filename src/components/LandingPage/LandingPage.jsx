@@ -1,6 +1,13 @@
 import {Form, Link, Outlet, redirect, useLoaderData} from "react-router-dom";
 import './LandingPage.css';
 import {isLoggedIn} from "../../services/auth.js";
+import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
+
+const darkTheme = createTheme({
+    palette: {
+        mode: 'dark',
+    }
+})
 
 function LandingPage() {
     const { isLogged } = useLoaderData();
@@ -16,7 +23,10 @@ function LandingPage() {
                 </div>
             </nav>
             <div className="root">
-                <Outlet/>
+                <ThemeProvider theme={darkTheme}>
+                    <CssBaseline />
+                    <Outlet/>
+                </ThemeProvider>
             </div>
             <footer>
                 <div className="links">

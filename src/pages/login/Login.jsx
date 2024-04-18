@@ -1,5 +1,7 @@
 import {Form, redirect, useActionData} from "react-router-dom";
 import {isLoggedIn, login} from "../../services/auth.js";
+import {Button, TextField} from "@mui/material";
+import "./Login.css"
 
 function Login() {
     const { loginError } = useActionData() || {};
@@ -9,18 +11,12 @@ function Login() {
             <h1>Login</h1>
             {loginError && <p>{loginError}</p>}
 
-            <Form method="post">
-                <label>
-                    Username:
-                    <input type="text" name="username" />
-                </label>
+            <Form method="post" className="loginForm">
+                <TextField label="Username" name="username" />
                 <br />
-                <label>
-                    Password:
-                    <input type="password" name="password" />
-                </label>
+                <TextField label="Mot de passe" type="password" name="password" />
                 <br />
-                <button type="submit">Login</button>
+                <Button type="submit">Login</Button>
             </Form>
         </>
     )

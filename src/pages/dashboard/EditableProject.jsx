@@ -11,6 +11,8 @@ function EditableProject() {
     const form = useRef(null);
 
     useEffect(() => {
+        if (!projectState._id) return;
+
         submit(form.current)
     }, [projectState]);
 
@@ -56,7 +58,7 @@ function EditableProject() {
 
                 <EditableField name="title" defaultValue={project.title} tag="h2" required/>
                 <EditableField name="short_description" defaultValue={project.short_description} required/>
-                <EditableField name="description" defaultValue={project.description} required/>
+                <EditableField name="description" rows={4} multiline defaultValue={project.description} required/>
 
                 <hr />
                 {projectState.keywords ? projectState.keywords.map((keyword, index) => (
@@ -80,7 +82,9 @@ function EditableProject() {
                         <button type="button" onClick={handleDeleteImage(index)}>Supprimer</button>
                     </div>
                 )) : null}
-                <button type="button" onClick={handleAddImage}>Ajouter une image</button>
+                <div>
+                    <button type="button" onClick={handleAddImage}>Ajouter une image</button>
+                </div>
 
                 {!project._id ? (
                     <button type="submit">Save</button>
@@ -96,7 +100,12 @@ import {Form, redirect, useLoaderData, useSubmit} from "react-router-dom";
 import {createProject, deleteProject, fetchProject, updateProject} from "../../services/projects.js";
 
 export function newProjectLoader() {
-    return { project: {} };
+    return {
+        project: {
+            keywords: [],
+            images: []
+        }
+    };
 }
 
 export async function editableProjectLoader({ params }) {
