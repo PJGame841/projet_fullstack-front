@@ -18,8 +18,10 @@ Vous devez avoir les ports suivants non-utilisés:
 - Créez un fichier .env à la racine du projet avec les variables suivantes :
 ```
 APP_JWT_SECRET=secret
+APP_SECRET_KEY=secret
 APP_REGISTER_KEY=register
 ```
+Si vous désirez garder l'utilisateur "pj" (mdp: "pj"), laissez le APP_SECRET_KEY sur "secret"
 
 - Créez l'image docker du back-end (cf. README back-end)
 - Lancer le projet avec la commande :

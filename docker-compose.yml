@@ -3,7 +3,7 @@ services:
     image: nginx
     build:
       context: ./nginx
-      dockerfile: ./nginx.DockerFile
+      dockerfile: ./nginx.Dockerfile
     volumes:
       - ./nginx:/etc/nginx/conf.d
     ports:
@@ -34,6 +34,9 @@ services:
       - db
       - nginx
   db:
-    image: mongo
+    image: mongodb/mongodb-community-server
+    volumes:
+      - ./mongodump/mongorestore.sh:/docker-entrypoint-initdb.d/mongorestore.sh
+      - ./mongodump/projet_back:/dump
     ports:
       - "27017:27017"
