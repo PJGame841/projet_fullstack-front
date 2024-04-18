@@ -1,8 +1,41 @@
-# React + Vite
+# Projet Fullstack ENSIM 2024
+## Partie Front-end
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Lancement du projet
 
-Currently, two official plugins are available:
+#### ATTENTION
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Vous devez avoir les ports suivants non-utilisés:
+```
+80
+27017
+3000
+8080
+```
+
+#### Etapes:
+
+- Créez un fichier .env à la racine du projet avec les variables suivantes :
+```
+APP_JWT_SECRET=secret
+APP_REGISTER_KEY=register
+```
+
+- Créez l'image docker du back-end (cf. README back-end)
+- Lancer le projet avec la commande :
+```
+docker compose up -d
+```
+- Le projet est maintenant disponible sur http://localhost/
+
+
+### Développement
+
+- Lancez en premier la partie back-end sur le port 3000
+- Lancez les commandes suivantes:
+```
+npm install -g pnpm
+pnpm install
+pnpm run dev
+```
+- L'application sera disponible sur http://localhost:5173/

@@ -1,0 +1,39 @@
+services:
+  nginx:
+    image: nginx
+    build:
+      context: ./nginx
+      dockerfile: ./nginx.DockerFile
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  web:
+    image: pjl-front
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - api
+      - nginx
+  api:
+    image: pjl-back
+    ports:
+      - "3000:3000"
+    environment:
+      - APP_MONGO_URL=mongodb://db:27017/projet_back
+      - PORT=3000
+      - APP_BASE_PATH=/api
+      - APP_JWT_SECRET=${APP_JWT_SECRET}
+      - APP_REGISTER_KEY=${APP_REGISTER_KEY}
+    depends_on:
+      - db
+      - nginx
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
