@@ -45,9 +45,16 @@ function EditableProject() {
     return (
         <>
             {project._id ? (
-                <Form method="delete">
-                    <button type="submit">Delete</button>
-                </Form>
+                <>
+                    <h2>Metriques</h2>
+                    <div>
+                        <p>Nombre de clics: {project.click_count}</p>
+                        <p>Temps de vue: {project.view_time} secondes</p>
+                    </div>
+                    <Form method="delete">
+                        <Button type="submit">Delete</Button>
+                    </Form>
+                </>
             ) : null}
 
             <Form method="put" ref={form} onChange={(e) => {
@@ -64,10 +71,10 @@ function EditableProject() {
                 {projectState.keywords ? projectState.keywords.map((keyword, index) => (
                     <div className="keywordsField" key={index}>
                         <EditableField key={index} name={`keywords[${index}]`} defaultValue={keyword} required/>
-                        <button type="button" onClick={handleDeleteKeyword(index)}>Supprimer</button>
+                        <Button type="button" onClick={handleDeleteKeyword(index)}>Supprimer</Button>
                     </div>
                 )) : null}
-                <button type="button" onClick={handleAddKeyword}>Ajouter un mot-clé</button>
+                <Button type="button" onClick={handleAddKeyword}>Ajouter un mot-clé</Button>
                 <hr />
 
                 <EditableField name="thumbnail" defaultValue={project.thumbnail} required>
@@ -79,11 +86,11 @@ function EditableProject() {
                             <img src={image} alt="project image"/>
                         </EditableField>
 
-                        <button type="button" onClick={handleDeleteImage(index)}>Supprimer</button>
+                        <Button type="button" onClick={handleDeleteImage(index)}>Supprimer</Button>
                     </div>
                 )) : null}
                 <div>
-                    <button type="button" onClick={handleAddImage}>Ajouter une image</button>
+                    <Button type="button" onClick={handleAddImage}>Ajouter une image</Button>
                 </div>
 
                 {!project._id ? (
@@ -98,6 +105,7 @@ import EditableField from "./EditableField.jsx";
 import {Form, redirect, useLoaderData, useSubmit} from "react-router-dom";
 
 import {createProject, deleteProject, fetchProject, updateProject} from "../../services/projects.js";
+import {Button} from "@mui/material";
 
 export function newProjectLoader() {
     return {

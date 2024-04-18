@@ -2,10 +2,16 @@
 import "./Project.css";
 import {useLoaderData} from "react-router-dom";
 import {fetchProject} from "../../services/projects.js";
-import {click} from "../../services/metrics.js";
+import {click, view} from "../../services/metrics.js";
+import {useEffect} from "react";
 
 function Project() {
     const { project } = useLoaderData();
+
+    useEffect(() => {
+        const interval = setInterval(() => view(project._id), 5000)
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <div>
