@@ -30,6 +30,7 @@ services:
       - APP_BASE_PATH=/api
       - APP_JWT_SECRET=${APP_JWT_SECRET}
       - APP_REGISTER_KEY=${APP_REGISTER_KEY}
+      - APP_SECRET_KEY=${APP_SECRET_KEY}
     depends_on:
       - db
       - nginx
