@@ -11,8 +11,6 @@ COPY . /usr/src/app
 
 RUN pnpm run build
 
-COPY ./dist /usr/src/app/dist
-
 EXPOSE 8080
 
 CMD ["pnpm", "start"]

@@ -25,19 +25,19 @@ Si vous désirez garder l'utilisateur "pj" (mdp: "pj"), laissez le APP_SECRET_KE
 
 - Créez l'image docker du back-end (cf. README back-end)
 - Lancer le projet avec la commande :
-```
-docker compose up -d
+```bash
+docker compose up -d --build
 ```
 - Le projet est maintenant disponible sur http://localhost/
-
+- La documentation de l'API est disponible sur http://localhost/api/api-doc
 
 ### Développement
 
 - Lancez en premier la partie back-end sur le port 3000
 - Lancez les commandes suivantes:
-```
-npm install -g pnpm
-pnpm install
+```bash
+npm install -g pnpm && \
+pnpm install && \
 pnpm run dev
 ```
 - L'application sera disponible sur http://localhost:5173/
