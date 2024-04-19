@@ -1,3 +1,4 @@
+import { getAccessToken } from './auth'
 
 export function fetchProjects() {
     return fetch('/api/projects')
@@ -16,6 +17,7 @@ export function createProject(project) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getAccessToken()}`,
         },
         body: JSON.stringify(project),
     })
@@ -34,6 +36,7 @@ export function updateProject(projectId, project) {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getAccessToken()}`
         },
         body: JSON.stringify(project),
     })
@@ -44,6 +47,9 @@ export function updateProject(projectId, project) {
 export function deleteProject(projectId) {
     return fetch(`/api/projects/${projectId}`, {
         method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${getAccessToken()}`
+        },
     })
         .then(response => response.json())
         .then(data => data.data)
